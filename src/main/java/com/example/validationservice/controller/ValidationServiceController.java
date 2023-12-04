@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ValidationServiceController {
-    ValidationService validationService;
+    private final ValidationService validationService;
+
+    public ValidationServiceController(ValidationService validationService) {
+        this.validationService = validationService;
+    }
 
     @PostMapping("/validate")
     Order validateOrder(@RequestBody Order newOrder) {
