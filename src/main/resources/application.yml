@@ -1,0 +1,11 @@
+spring:
+    config:
+        import: 'optional:consul:'
+management:
+    security:
+        enabled: false
+server:
+    port: 8081
+springdoc:
+    api-docs:
+        path: '/api-docs'
