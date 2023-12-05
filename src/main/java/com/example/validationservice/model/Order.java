@@ -1,13 +1,19 @@
 package com.example.validationservice.model;
 
-import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+
 import java.util.StringJoiner;
 
+import static jakarta.persistence.GenerationType.IDENTITY;
+
+@Entity
 public class Order {
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
     private int id;
     private long customerId;
-    private Product product;
-    private Date orderDate;
 
     public int getId() {
         return id;
@@ -25,29 +31,11 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
-    public Date getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
-    }
-
     @Override
     public String toString() {
         return new StringJoiner(", ", Order.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("customerId=" + customerId)
-                .add("product=" + product)
-                .add("orderDate=" + orderDate)
                 .toString();
     }
 }
