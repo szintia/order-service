@@ -3,12 +3,14 @@ package com.example.validationservice.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 import java.util.StringJoiner;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
+@Table(name = "`order`")
 public class Order {
     @Id
     @GeneratedValue(strategy = IDENTITY)
