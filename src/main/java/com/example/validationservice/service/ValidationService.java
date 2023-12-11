@@ -13,6 +13,7 @@ public class ValidationService {
     private OrderRepository orderRepository;
 
     public Order validate(Order newOrder) {
+        orderRepository.save(newOrder);
         return newOrder;
     }
 
