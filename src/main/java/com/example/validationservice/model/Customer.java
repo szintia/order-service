@@ -1,9 +1,13 @@
 package com.example.validationservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.StringJoiner;
 
@@ -15,7 +19,12 @@ public class Customer {
     @GeneratedValue(strategy = IDENTITY)
     private long id;
 
+    @NotBlank
+    @Size(max = 20)
     private String firstName;
+
+    @NotBlank
+    @Size(max = 20)
     private String lastName;
 
     @OneToOne(mappedBy = "customer")

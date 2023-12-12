@@ -6,7 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
 import java.util.StringJoiner;
 
 import static jakarta.persistence.CascadeType.ALL;
@@ -18,6 +20,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private int id;
+
+    @NotNull
+    private LocalDate date;
 
     @OneToOne(cascade = ALL)
     @JoinColumn(name = "customer_id", referencedColumnName = "id")
@@ -39,10 +44,19 @@ public class Order {
         this.customer = customer;
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Order.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
+                .add("date=" + date)
                 .add("customer=" + customer)
                 .toString();
     }
