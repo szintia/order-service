@@ -5,6 +5,17 @@ For the JPA based implementations I use H2 in memory DB.
 
 Until this moment we have only an order validation service which exposes below REST interfaces:
 
-## Methods      Urls	        Actions
+### Methods      Urls	        Actions
     POST        /validate       create a new order in case it's valid
     GET         /orders         retrieve all orders
+
+### Technical details:
+
+Local port is set to 8081
+
+After running the application, you can find
+- OpenApi descriptions at:
+http://localhost:8081/api-docs
+- Swagger UI at:
+http://localhost:8081/swagger-ui/index.html#/
+
