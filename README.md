@@ -1,7 +1,9 @@
 # Order validation microservice with Java 17 and Spring Boot
 
 This exercise is about to showcase a microservice ecosystem with Kafka Streams.
-For the JPA based implementations I use H2 in memory DB.
+For the JPA based implementations I use H2 in memory DB. 
+The REST application is reactive in order to be able to handle massive numbers of concurrent connections.
+Later I plan to replace H2 with Redis to access data reactively as well.
 
 Until this moment we have only an order validation service which exposes below REST interfaces:
 
