@@ -21,3 +21,35 @@ http://localhost:8081/api-docs
 - Swagger UI at:
 http://localhost:8081/swagger-ui/index.html#/
 
+### Setting up Kafka on Windows
+
+1. Download Kafka (includes Zookeeper): https://www.apache.org/dyn/closer.cgi?path=/kafka/
+2. After extracting, start Zookeeper service:
+
+   D:\kafka\kafka_2.13-3.6.1>.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+
+   By default it listens to port 2181.
+   [2023-12-14 16:15:31,174] INFO clientPortAddress is 0.0.0.0:**2181** (org.apache.zookeeper.server.quorum.QuorumPeerConfig)
+3. Start Kafka in a new cmd:
+
+   D:\kafka\kafka_2.13-3.6.1>.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+   It's connected to Zookeeper:
+
+   [2023-12-14 16:17:38,748] INFO Connecting to zookeeper on localhost:2181 (kafka.server.KafkaServer)
+
+   [2023-12-14 16:17:40,014] INFO Registered broker 0 at path /brokers/ids/0 with addresses: PLAINTEXT://3B1811282:**9092**, czxid (broker epoch): 25 (kafka.zk.KafkaZkClient)
+
+   Default port is 9092. In the command prompt we can see all the configurations.
+
+4. Let's create a topic, open a new cmd:
+
+   D:\kafka\kafka_2.13-3.6.1>.\bin\windows\kafka-topics.bat --create --topic orders --bootstrap-server localhost:9092
+
+   Created topic orders.
+   
+
+   
+   
+   
+
