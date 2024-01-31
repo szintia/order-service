@@ -9,10 +9,17 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ValidationService {
+    private final OrderRepository orderRepository;
+    private final KafkaService kafkaService;
+
     @Autowired
-    private OrderRepository orderRepository;
+    ValidationService(OrderRepository orderRepository, KafkaService kafkaService) {
+        this.orderRepository = orderRepository;
+        this.kafkaService = kafkaService;
+    }
 
     public Mono<Order> validate(Order newOrder) {
+        kafkaService.sendMessage(newOrder);
         return Mono.just(orderRepository.save(newOrder));
     }
 
