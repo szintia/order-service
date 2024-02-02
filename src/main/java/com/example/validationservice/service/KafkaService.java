@@ -5,12 +5,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
 public class KafkaService {
-    private static final String ORDERS_TOPIC = "orders";
+    @Value(value = "${spring.kafka.topic}")
+    private String topic = "orders";
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final ObjectMapper objectMapper;
@@ -24,7 +26,7 @@ public class KafkaService {
     void sendMessage(Order order) {
         try {
             byte[] serializedObject = objectMapper.writeValueAsBytes(order);
-            ProducerRecord<String, Object> record = new ProducerRecord<>(ORDERS_TOPIC, serializedObject);
+            ProducerRecord<String, Object> record = new ProducerRecord<>(topic, serializedObject);
             kafkaTemplate.send(record);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
