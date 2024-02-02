@@ -19,8 +19,9 @@ public class ValidationService {
     }
 
     public Mono<Order> validate(Order newOrder) {
+        Order savedOrder = orderRepository.save(newOrder);
         kafkaService.sendMessage(newOrder);
-        return Mono.just(orderRepository.save(newOrder));
+        return Mono.just(savedOrder);
     }
 
     public Flux<Order> getAll() {
