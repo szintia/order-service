@@ -1,17 +1,21 @@
-# Order validation microservice with Java 17 and Spring Boot
+# Order validation microservice
 
-This exercise is about to showcase a microservice ecosystem with Kafka Streams.
-For the JPA based implementations I use H2 in memory DB. 
-The REST application is reactive in order to be able to handle massive numbers of concurrent connections.
-Later I plan to replace H2 with Redis to access data reactively as well.
+This exercise is about to showcase a reactive microservice ecosystem with Kafka distributed event streaming platform. <br />
+Using JDK 17 with Spring framework components (Core, Boot, Web, MVC, Cloud, WebFlux, Actuator, Data JPA). <br />
+For the JPA based implementations I use H2 in memory DB but later I plan to replace it with Redis to access data reactively as well. <br />
+REST API is created with Spring WebFlux, which is a fully non-blocking web stack - it can do more work with fewer resources - and supports back pressure. <br />
+At the moment only the server side is implemented in a reactive way but later I will do the same for the client side with the help of WebClient. <br />
+
+See more about reactive programming: https://reactivemanifesto.org/
 
 Until this moment we have only an order validation service which exposes below REST interfaces:
 
+# API Endpoints
 ### Methods      Urls	        Actions
     POST        /validate       create a new order in case it's valid
     GET         /orders         retrieve all orders
 
-### Technical details:
+# Technical details:
 
 Local port is set to 8081
 
@@ -20,8 +24,8 @@ After running the application, you can find
 http://localhost:8081/api-docs
 - Swagger UI at:
 http://localhost:8081/swagger-ui/index.html#/
-<details>
-<summary><b> Setting up Kafka on Windows</b></summary>
+
+# Setting up Kafka on Windows
 
 1. Download Kafka (includes Zookeeper): https://www.apache.org/dyn/closer.cgi?path=/kafka/
 2. After extracting, start Zookeeper service via zookeeper-server-start.bat command.
@@ -76,9 +80,9 @@ More info can be found on the following Apache Kafka site: https://kafka.apache.
 </details>
    
 
-### Sending message to Kafka topic
+# Sending message to Kafka topic
 
-Added Kafka Producer (Spring + Apache Kafka) and now we can send messages to the topic called "orders" via Swagger UI.
+After the setup of Kafka we can now send messages to the topic called "orders" via Swagger UI - POST HTTP method.
 
 ![image](https://github.com/szintia/validation-service/assets/8359566/1d567e27-781c-4a55-ac5e-2600755cc279)
 
