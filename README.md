@@ -86,5 +86,9 @@ After the setup of Kafka we can now send messages to the topic called "orders" v
 
 ![image](https://github.com/szintia/validation-service/assets/8359566/1d567e27-781c-4a55-ac5e-2600755cc279)
 
+# Building Docker image
 
+To create our own Docker image, the executable artifact from the validation service we need to
+1. build the Dockerfile (added to the project): ``` docker build -t my-app:1.0 .```
+   ![image](https://github.com/szintia/validation-service/assets/8359566/e11d0dc5-4e56-417d-80be-cdeb066a895e)
 
