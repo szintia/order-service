@@ -1,4 +1,4 @@
 FROM eclipse-temurin:17-jdk-alpine
-
-
-#CMD vs ENTRYPOINT?
+VOLUME /tmp
+COPY target/*.jar validation-service-1.0.0.jar
+ENTRYPOINT ["java", "-jar", "/validation-service-1.0.0.jar"]
