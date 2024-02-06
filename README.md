@@ -28,7 +28,7 @@ http://localhost:8081/swagger-ui/index.html#/
 # Setting up Kafka on Windows
 
 1. Download Kafka (includes Zookeeper): https://www.apache.org/dyn/closer.cgi?path=/kafka/
-2. After extracting, start Zookeeper service via zookeeper-server-start.bat command.
+2. After extracting, start Zookeeper service via zookeeper-server-start.bat command. For local development 1 node will be sufficient.
    
    ```D:\kafka\kafka_2.13-3.6.1>.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties```
    By default it listens to port 2181.
@@ -87,7 +87,7 @@ After the setup of Kafka we can now send messages to the topic called "orders" v
 ![image](https://github.com/szintia/validation-service/assets/8359566/1d567e27-781c-4a55-ac5e-2600755cc279)
 
 # Building and verifying Dockerfile
-NOTE - Kafka configuration is not added yet to the Dockerfile <br />
+
 To create our own Docker image, the executable artifact from the validation service, we need to
 1. build the Dockerfile (committed to the project) with a tag 1.0 and with a name "my-app":<br />
    ``` docker build -t my-app:1.0 .```<br />
@@ -95,12 +95,22 @@ To create our own Docker image, the executable artifact from the validation serv
    ![image](https://github.com/szintia/validation-service/assets/8359566/e11d0dc5-4e56-417d-80be-cdeb066a895e)
    ![image](https://github.com/szintia/validation-service/assets/8359566/fc548ade-6e49-4a6e-bb3d-f238b4e18b2a)
 
-3. verify our validation service starts successfully -> running Docker image in a container <br />
-   ```docker run -d -p 8081:8081 my-app:1.0``` -> run application in a container with port binding, our app listens to port 8081 same as container's port<br />
+3. verify our validation service starts successfully<br />
+   ```docker run -d -p 8081:8081 my-app:1.0``` -> run Docker image = so basically to run our app in a Docker container with port binding, I set the app to listen to port 8081 on host, same as the container's port.<br />
    ```docker ps ```  -> list running containers<br />
 ![image](https://github.com/szintia/validation-service/assets/8359566/1f110f5a-33b5-4aaa-a19a-bcfc49a451d7) <br />
 Swagger UI is now available on port 8081:
-![image](https://github.com/szintia/validation-service/assets/8359566/8718d33e-470b-4106-9c2b-824e8c7aa69e)
+![image](https://github.com/szintia/validation-service/assets/8359566/8718d33e-470b-4106-9c2b-824e8c7aa69e) <br />
+
+So until now we are able to run our validation service in a Docker container but we will need also Kafka with Zookeeper.
+This will result a multi-container application --> Let's use Docker Compose to define the services I need.<br />
+
+
+
+
+
+
+
 
 
 
