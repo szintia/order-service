@@ -103,7 +103,8 @@ Swagger UI is now available on port 8081:
 ![image](https://github.com/szintia/validation-service/assets/8359566/8718d33e-470b-4106-9c2b-824e8c7aa69e) <br />
 
 So until now we are able to run our validation service in a Docker container but we will need also Kafka with Zookeeper.
-This will result a multi-container application --> Let's use Docker Compose to define the services I need.<br />
+This will result in a multi-container application --> Let's use Docker Compose to define the services I need.<br />
+TO BE CONTINUED.
 
 
 
