@@ -14,11 +14,14 @@ public class KafkaService {
     @Value(value = "${spring.kafka.topic}")
     private String topic = "orders";
 
-    private final KafkaTemplate<String, Object> kafkaTemplate;
-    private final ObjectMapper objectMapper;
+    private KafkaTemplate<String, Object> kafkaTemplate;
+    private ObjectMapper objectMapper;
+
+    public KafkaService() {
+    }
 
     @Autowired
-    KafkaService(KafkaTemplate kafkaTemplate, ObjectMapper objectMapper) {
+    KafkaService(KafkaTemplate<String, Object> kafkaTemplate, ObjectMapper objectMapper) {
         this.kafkaTemplate = kafkaTemplate;
         this.objectMapper = objectMapper;
     }

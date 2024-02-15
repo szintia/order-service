@@ -9,8 +9,11 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ValidationService {
-    private final OrderRepository orderRepository;
-    private final KafkaService kafkaService;
+    private OrderRepository orderRepository;
+    private KafkaService kafkaService;
+
+    public ValidationService() {
+    }
 
     @Autowired
     ValidationService(OrderRepository orderRepository, KafkaService kafkaService) {
