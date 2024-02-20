@@ -5,16 +5,13 @@ import com.example.validationservice.model.Customer;
 import com.example.validationservice.model.Order;
 import com.example.validationservice.service.ValidationService;
 import org.jetbrains.annotations.NotNull;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.reactive.function.BodyInserters;
 import reactor.core.publisher.Mono;
@@ -37,15 +34,19 @@ public class ValidationServiceControllerTest {
     private ValidationService validationService;
 
     private WebTestClient webTestClient;
+    private Order order;
 
-    @Test
-    void givenValidPostRequest_validateOrder_ReturnSuccess() throws Exception {
-        //GIVEN
+    @BeforeEach
+    void beforeEach() {
         webTestClient = WebTestClient.bindToController(validationServiceController).build();
 
-        Order order = getOrder();
-
+        order = getOrder();
         given(validationService.validate(order)).willReturn(Mono.just(order));
+    }
+
+    @Test
+    void givenValidPostRequest_validateOrder_ReturnSuccess() {
+        //GIVEN
 
         //WHEN
         webTestClient
@@ -53,6 +54,19 @@ public class ValidationServiceControllerTest {
                 .uri("/validate")
                 .contentType(APPLICATION_JSON)
                 .body(BodyInserters.fromValue(order))
+                .exchange()
+                //THEN
+                .expectStatus().isOk();
+    }
+
+    @Test
+    void givenValidGetRequest_retrieveAllOrders_ReturnSuccess() {
+        //GIVEN
+
+        //WHEN
+        webTestClient
+                .get()
+                .uri("/orders")
                 .exchange()
                 //THEN
                 .expectStatus().isOk();
