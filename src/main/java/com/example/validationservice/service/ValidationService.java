@@ -9,25 +9,19 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ValidationService {
-    private OrderRepository orderRepository;
-    private KafkaService kafkaService;
+    private OrderService orderService;
 
     public ValidationService() {
     }
 
-    @Autowired
-    ValidationService(OrderRepository orderRepository, KafkaService kafkaService) {
-        this.orderRepository = orderRepository;
-        this.kafkaService = kafkaService;
+    public ValidationService(OrderService orderService) {
+        this.orderService = orderService;
     }
 
     public Mono<Order> validate(Order newOrder) {
-        Order savedOrder = orderRepository.save(newOrder);
-        kafkaService.sendMessage(newOrder);
-        return Mono.just(savedOrder);
-    }
+        //TODO  validate order
+        Order savedOrder = orderService.persistOrder(newOrder);
 
-    public Flux<Order> getAll() {
-        return Flux.fromIterable(orderRepository.findAll());
+        return Mono.just(savedOrder);
     }
 }

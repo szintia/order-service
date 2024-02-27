@@ -1,6 +1,7 @@
 package com.example.validationservice.controller;
 
 import com.example.validationservice.model.Order;
+import com.example.validationservice.service.OrderService;
 import com.example.validationservice.service.ValidationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -15,9 +16,11 @@ import reactor.core.publisher.Mono;
 @RestController
 public class ValidationServiceController {
     private final ValidationService validationService;
+    private final OrderService orderService;
 
-    public ValidationServiceController(ValidationService validationService) {
+    public ValidationServiceController(ValidationService validationService, OrderService orderService) {
         this.validationService = validationService;
+        this.orderService = orderService;
     }
 
     @Operation(summary = "Create a new validated order.")
@@ -40,6 +43,6 @@ public class ValidationServiceController {
     )
     @GetMapping("/orders")
     Flux<Order> getAll() {
-        return validationService.getAll();
+        return orderService.getAll();
     }
 }

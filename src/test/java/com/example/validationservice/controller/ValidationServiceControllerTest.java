@@ -3,6 +3,7 @@ package com.example.validationservice.controller;
 import com.example.validationservice.ValidationServiceApplication;
 import com.example.validationservice.model.Customer;
 import com.example.validationservice.model.Order;
+import com.example.validationservice.service.OrderService;
 import com.example.validationservice.service.ValidationService;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +33,9 @@ public class ValidationServiceControllerTest {
 
     @MockBean
     private ValidationService validationService;
+
+    @MockBean
+    private OrderService orderService;
 
     private WebTestClient webTestClient;
     private Order order;
