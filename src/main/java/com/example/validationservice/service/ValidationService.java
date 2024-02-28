@@ -1,10 +1,7 @@
 package com.example.validationservice.service;
 
 import com.example.validationservice.model.Order;
-import com.example.validationservice.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -18,9 +15,12 @@ public class ValidationService {
         this.orderService = orderService;
     }
 
-    public Mono<Order> validate(Order newOrder) {
-        //TODO  validate order
-        Order savedOrder = orderService.persistOrder(newOrder);
+    public Mono<Order> validate(Order order) {
+        if (order.getCustomer() == null) {
+            return null;
+        }
+
+        Order savedOrder = orderService.persistOrder(order);
 
         return Mono.just(savedOrder);
     }
