@@ -33,7 +33,7 @@ public class OrderServiceController {
             @ApiResponse(responseCode = "500", description = "Internal server error")}
     )
     @PostMapping(ORDER_POST_URI)
-    Mono<Order> validateOrder(@RequestBody Order newOrder) {
+    Mono<Order> catchOrder(@RequestBody Order newOrder) {
         return validationService.validate(newOrder);
     }
 
