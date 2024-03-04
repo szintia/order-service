@@ -1,4 +1,4 @@
-# Order validation microservice
+# Order microservice
 
 This exercise is about to showcase a reactive microservice ecosystem with Kafka distributed event streaming platform. <br />
 Using JDK 17 with Spring framework components (Core, Boot, Web, MVC, Cloud, WebFlux, Actuator, Data JPA). <br />
@@ -8,11 +8,11 @@ At the moment only the server side is implemented in a reactive way but later I 
 
 See more about reactive programming: https://reactivemanifesto.org/
 
-Until this moment we have only an order validation service which exposes below REST interfaces:
+Until this moment we have only an order service which exposes below REST interfaces:
 
 # API Endpoints
 ### Methods      Urls	        Actions
-    POST        /validate       create a new order in case it's valid
+    POST        /order          create a new order in case it's valid
     GET         /orders         retrieve all orders
 
 # Technical details:
@@ -88,21 +88,21 @@ After the setup of Kafka we can now send messages to the topic called "orders" v
 
 # Building and verifying Dockerfile
 
-To create our own Docker image, the executable artifact from the validation service, we need to
+To create our own Docker image, the executable artifact from the order service, we need to
 1. build the Dockerfile (committed to the project) with a tag 1.0 and with a name "my-app":<br />
    ``` docker build -t my-app:1.0 .```<br />
    Image is built:<br />
    ![image](https://github.com/szintia/validation-service/assets/8359566/e11d0dc5-4e56-417d-80be-cdeb066a895e)
    ![image](https://github.com/szintia/validation-service/assets/8359566/fc548ade-6e49-4a6e-bb3d-f238b4e18b2a)
 
-3. verify our validation service starts successfully<br />
+3. verify our order service starts successfully<br />
    ```docker run -d -p 8081:8081 my-app:1.0``` -> run Docker image = so basically to run our app in a Docker container with port binding, I set the app to listen to port 8081 on host, same as the container's port.<br />
    ```docker ps ```  -> list running containers<br />
 ![image](https://github.com/szintia/validation-service/assets/8359566/1f110f5a-33b5-4aaa-a19a-bcfc49a451d7) <br />
 Swagger UI is now available on port 8081:
 ![image](https://github.com/szintia/validation-service/assets/8359566/8718d33e-470b-4106-9c2b-824e8c7aa69e) <br />
 
-So until now we are able to run our validation service in a Docker container but we will need also Kafka with Zookeeper.
+So until now we are able to run our order service in a Docker container but we will need also Kafka with Zookeeper.
 This will result in a multi-container application --> Let's use Docker Compose to define the services I need.<br />
 TO BE CONTINUED.
 
