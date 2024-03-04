@@ -1,6 +1,6 @@
-package com.example.validationservice.service;
+package com.example.orderservice.service;
 
-import com.example.validationservice.model.Order;
+import com.example.orderservice.model.Order;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.ProducerRecord;

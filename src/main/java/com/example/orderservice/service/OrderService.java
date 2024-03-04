@@ -1,7 +1,7 @@
-package com.example.validationservice.service;
+package com.example.orderservice.service;
 
-import com.example.validationservice.model.Order;
-import com.example.validationservice.repository.OrderRepository;
+import com.example.orderservice.model.Order;
+import com.example.orderservice.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

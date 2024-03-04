@@ -1,6 +1,6 @@
-package com.example.validationservice.service;
+package com.example.orderservice.service;
 
-import com.example.validationservice.model.Order;
+import com.example.orderservice.model.Order;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 

@@ -1,4 +1,4 @@
-package com.example.validationservice.controller;
+package com.example.orderservice.controller;
 
 import org.springdoc.api.ErrorMessage;
 import org.springframework.http.HttpStatus;

@@ -1,10 +1,10 @@
-package com.example.validationservice.controller;
+package com.example.orderservice.controller;
 
-import com.example.validationservice.ValidationServiceApplication;
-import com.example.validationservice.model.Customer;
-import com.example.validationservice.model.Order;
-import com.example.validationservice.service.OrderService;
-import com.example.validationservice.service.ValidationService;
+import com.example.orderservice.OrderServiceApplication;
+import com.example.orderservice.model.Customer;
+import com.example.orderservice.model.Order;
+import com.example.orderservice.service.OrderService;
+import com.example.orderservice.service.ValidationService;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,17 +19,19 @@ import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 
+import static com.example.orderservice.controller.OrderServiceController.ORDERS_GET_URI;
+import static com.example.orderservice.controller.OrderServiceController.ORDER_POST_URI;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @ActiveProfiles("test")
 @AutoConfigureWebTestClient
-@SpringBootTest(classes = {ValidationServiceApplication.class, KafkaTestConfig.class})
+@SpringBootTest(classes = {OrderServiceApplication.class, KafkaTestConfig.class})
 
-public class ValidationServiceControllerTest {
+public class OrderServiceControllerTest {
 
     @Autowired
-    private ValidationServiceController validationServiceController;
+    private OrderServiceController validationServiceController;
 
     @MockBean
     private ValidationService validationService;
@@ -55,7 +57,7 @@ public class ValidationServiceControllerTest {
         //WHEN
         webTestClient
                 .post()
-                .uri("/validate")
+                .uri(ORDER_POST_URI)
                 .contentType(APPLICATION_JSON)
                 .body(BodyInserters.fromValue(order))
                 .exchange()
@@ -70,7 +72,7 @@ public class ValidationServiceControllerTest {
         //WHEN
         webTestClient
                 .get()
-                .uri("/orders")
+                .uri(ORDERS_GET_URI)
                 .exchange()
                 //THEN
                 .expectStatus().isOk();

@@ -1,8 +1,8 @@
-package com.example.validationservice.controller;
+package com.example.orderservice.controller;
 
-import com.example.validationservice.model.Order;
-import com.example.validationservice.service.OrderService;
-import com.example.validationservice.service.ValidationService;
+import com.example.orderservice.model.Order;
+import com.example.orderservice.service.OrderService;
+import com.example.orderservice.service.ValidationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -14,11 +14,14 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-public class ValidationServiceController {
+public class OrderServiceController {
+    public static final String ORDER_POST_URI = "/order";
+    public static final String ORDERS_GET_URI = "/orders";
+
     private final ValidationService validationService;
     private final OrderService orderService;
 
-    public ValidationServiceController(ValidationService validationService, OrderService orderService) {
+    public OrderServiceController(ValidationService validationService, OrderService orderService) {
         this.validationService = validationService;
         this.orderService = orderService;
     }
@@ -29,7 +32,7 @@ public class ValidationServiceController {
             @ApiResponse(responseCode = "400", description = "Invalid request"),
             @ApiResponse(responseCode = "500", description = "Internal server error")}
     )
-    @PostMapping("/validate")
+    @PostMapping(ORDER_POST_URI)
     Mono<Order> validateOrder(@RequestBody Order newOrder) {
         return validationService.validate(newOrder);
     }
@@ -41,7 +44,7 @@ public class ValidationServiceController {
             @ApiResponse(responseCode = "404", description = "Order cannot be found"),
             @ApiResponse(responseCode = "500", description = "Internal server error")}
     )
-    @GetMapping("/orders")
+    @GetMapping(ORDERS_GET_URI)
     Flux<Order> getAll() {
         return orderService.getAll();
     }

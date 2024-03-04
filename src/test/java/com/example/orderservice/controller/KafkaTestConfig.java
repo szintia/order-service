@@ -1,4 +1,4 @@
-package com.example.validationservice.controller;
+package com.example.orderservice.controller;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

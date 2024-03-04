@@ -1,4 +1,4 @@
-package com.example.validationservice.model;
+package com.example.orderservice.model;
 
 import java.util.StringJoiner;
 
