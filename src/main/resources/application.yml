@@ -6,6 +6,8 @@ server:
 spring:
   main:
     allow-bean-definition-overriding: true
+  application:
+    order-service
   config:
     import: 'optional:consul:'
   datasource:
