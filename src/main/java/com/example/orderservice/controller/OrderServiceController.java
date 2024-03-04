@@ -26,7 +26,7 @@ public class OrderServiceController {
         this.orderService = orderService;
     }
 
-    @Operation(summary = "Create a new validated order.")
+    @Operation(summary = "Create a new validated order and add to the system.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "Invalid request"),
@@ -37,7 +37,7 @@ public class OrderServiceController {
         return validationService.validate(newOrder);
     }
 
-    @Operation(summary = "Retrieve all orders.")
+    @Operation(summary = "Bulk operation to retrieve all orders.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "Invalid request"),
