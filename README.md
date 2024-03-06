@@ -8,7 +8,7 @@ At the moment only the server side is implemented in a reactive way but later I 
 
 See more about reactive programming: https://reactivemanifesto.org/
 
-Until this moment we have only an order service which exposes below REST interfaces:
+Until this moment we have an order-service which exposes below REST interfaces and it's going to consume the order-details-service (https://github.com/szintia/order-details-service) in order to validate the order.
 
 # API Endpoints
 ### Methods      Urls	        Actions
